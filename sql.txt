@@ -1,0 +1,10 @@
+With CountryDocumentsOrder As(
+Select
+Docid, amount, row_number()over (order by amount desc)RN
+From CountryDocuments)
+Select
+Amount,doctype
+From CountryDocumentsOrder
+Inner join DocumentTypes
+On CountryDocumentsOrder.docid= DocumentTypes.docid
+Where  CountryDocumentsOrder.RN=2
